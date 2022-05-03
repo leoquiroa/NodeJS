@@ -152,3 +152,13 @@ A more real example
 	console.log(eventListeners +  " Listner(s) listening to connection event");
 	// Print> 1 Listner(s) listening to connection event
 	console.log("Program Ended.");	
+
+Output
+
+	2 Listner(s) listening to connection event
+    Listner1 will not listen now.
+    0 Listner(s) listening to connection event
+    Program Ended.
+
+**Event Emitter**
+-

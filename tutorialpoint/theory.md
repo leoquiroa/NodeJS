@@ -95,70 +95,32 @@ Thisexample shows that the program does not wait for file reading and proceeds t
 - Although events look quite similar to callbacks, the difference lies in the fact that callback functions are called when an asynchronous function returns its result, whereas event handling works on the observer pattern. 
 - The functions that listen to events act as **Observers**. Whenever an event gets fired, its listener function starts executing. Node.js has multiple in-built events available through events module and EventEmitter class which are used to bind events and event-listeners
 
-Simple example
-
-    // 1.Import events module
-    var events = require('events');
-    // 2.Create an eventEmitter object
-    var eventEmitter = new events.EventEmitter();
-    // 3.Create an event handler:
-	var  myEventHandler = function () {
-		console.log('Hi, I am an event!');
-	}
-    // 4.Bind event and event handler with a name
-	eventEmitter.on('eventName', myEventHandler);
-	// 5.Fire an event with the name 
-	eventEmitter.emit('eventName');
-
-A more real example
-
-
-	//import
-    var events =  require('events');  
-	// the eventEmitter
-    var eventEmitter =  new events.EventEmitter();  
-    
-    // listener #1 and #2
-    var listner1 =  function listner1()  { 
-	    console.log('listner1 executed.');  
-	}  
-	var listner2 =  function listner2()  { 
-		console.log('listner2 executed.');  
-	}  
-	
-	// Bind the connection event with the listner1 and listner2 function 		
-	eventEmitter.addListener('connect5', listner1);  
-	eventEmitter.on('connect5', listner2);  
-	
-	//count the elements binded
-	var eventListeners = require('events').EventEmitter.listenerCount(eventEmitter,'connect5'); 
-	console.log(eventListeners +  " Listner(s) listening to connection event");  
-	// Print> 2 Listner(s) listening to connection event
-	
-	// Fire the connection event 
-    eventEmitter.emit('connection');  
-    // Print>listner1 executed.
-	// Print>listner2 executed.
-
-    // Remove the binding of listner1 function
-    eventEmitter.removeListener('connection', listner1); 
-    console.log("Listner1 will not listen now.");  
-
-	// Fire the connection event 
-    eventEmitter.emit('connection'); 
-	// Print>listner2 executed.
-	
-	eventListeners = require('events').EventEmitter.listenerCount(eventEmitter,'connection'); 
-	console.log(eventListeners +  " Listner(s) listening to connection event");
-	// Print> 1 Listner(s) listening to connection event
-	console.log("Program Ended.");	
-
-Output
-
-	2 Listner(s) listening to connection event
-    Listner1 will not listen now.
-    0 Listner(s) listening to connection event
-    Program Ended.
-
 **Event Emitter**
 -
+- Many objects in a Node emit events, for example, a net.Server emits an event each time a peer connects to it
+- All objects which emit events are the instances of events.EventEmitter.
+- When an EventEmitter instance faces any error, it emits an 'error' event. 
+- When a new listener is added, 'newListener' event is fired
+- When a listener is removed, 'removeListener' event is fired.
+- EventEmitter provides multiple properties like *on* and *emit*. On property is used to bind a function with the event and emit is used to fire an event
+
+**Buffers**
+-
+- Pure JavaScript is Unicode friendly, but it is not so for binary data. 
+- While dealing with TCP streams or the file system, Then, it's necessary to handle octet streams. 
+- Node provides Buffer class which provides instances to store raw data similar to an array of integers but corresponds to a raw memory allocation outside the V8 heap.
+
+**Streams**
+-
+Streams are objects that let you read data from a source or write data to a destination in continuous fashion. In Node.js, there are four types of streams
+
+- Readable − Stream which is used for read operation.
+- Writable − Stream which is used for write operation.
+- Duplex − Stream which can be used for both read and write operation.
+- Transform − A type of duplex stream where the output is computed based on input.
+
+
+
+
+
+
